@@ -1903,6 +1903,75 @@
                     grid-template-columns: 1fr;
                 }
             }
+            /* Toast Notifications */
+            .tingee-toast-container {
+                position: fixed;
+                top: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+                pointer-events: none;
+            }
+            .tingee-toast {
+                pointer-events: auto;
+                background: white;
+                border-left: 4px solid var(--red);
+                border-radius: 10px;
+                box-shadow: var(--shadow-lg);
+                padding: 16px 20px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                min-width: 320px;
+                transform: translateY(-120%);
+                opacity: 0;
+                transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+            .tingee-toast.show {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            .tingee-toast-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+            .tingee-toast.success {
+                border-left-color: var(--green);
+            }
+            .tingee-toast.success .tingee-toast-icon {
+                background: #e8f5e9;
+                color: var(--green);
+            }
+            .tingee-toast.error {
+                border-left-color: var(--red);
+            }
+            .tingee-toast.error .tingee-toast-icon {
+                background: var(--red-light);
+                color: var(--red);
+            }
+            .tingee-toast-content {
+                flex: 1;
+            }
+            .tingee-toast-title {
+                font-size: 15px;
+                font-weight: 700;
+                color: var(--gray-900);
+                margin-bottom: 2px;
+            }
+            .tingee-toast-desc {
+                font-size: 13px;
+                color: var(--gray-500);
+                line-height: 1.4;
+            }
         </style>
     </head>
     <body>
@@ -7624,9 +7693,45 @@
 
             // THAY ĐƯỜNG DẪN WEB APP URL CỦA BẠN VÀO ĐÂY
             const WEB_APP_URL =
-                "https://script.google.com/macros/s/AKfycbx5RKvvsiNn2QMPY1CmN8OKYrdDEHUAE-FpSPtUZ3W91wB72iRY1m1wL0ZsyUGlZlHu/exec";
+                "https://script.google.com/macros/s/AKfycbwy2A0BDC78vne1v99xgI7QVZ6l5h2IlRKeb16Y7XIBlESweKBQgQKEuATr0ACxMi_c/exec";
 
             document.querySelectorAll("form").forEach((form) => {
+                // Toast Notification System
+                if (!document.querySelector(".tingee-toast-container")) {
+                    const toastContainer = document.createElement("div");
+                    toastContainer.className = "tingee-toast-container";
+                    document.body.appendChild(toastContainer);
+                }
+
+                function showToast(type, title, desc) {
+                    const toastContainer = document.querySelector(
+                        ".tingee-toast-container",
+                    );
+                    const toast = document.createElement("div");
+                    toast.className = `tingee-toast ${type}`;
+
+                    const iconSvg =
+                        type === "success"
+                            ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+                            : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+
+                    toast.innerHTML = `
+                        <div class="tingee-toast-icon">${iconSvg}</div>
+                        <div class="tingee-toast-content">
+                            <div class="tingee-toast-title">${title}</div>
+                            <div class="tingee-toast-desc">${desc}</div>
+                        </div>
+                    `;
+
+                    toastContainer.appendChild(toast);
+
+                    requestAnimationFrame(() => toast.classList.add("show"));
+
+                    setTimeout(() => {
+                        toast.classList.remove("show");
+                        setTimeout(() => toast.remove(), 400);
+                    }, 4000);
+                }
                 // Khởi tạo Captcha toán học
                 const initCaptcha = () => {
                     const n1 = Math.floor(Math.random() * 10) + 1;
@@ -7667,8 +7772,10 @@
                         'input[name="captcha_answer"]',
                     ).value;
                     if (expected !== answer) {
-                        alert(
-                            "Kết quả phép tính xác thực không đúng. Vui lòng thử lại!",
+                        showToast(
+                            "error",
+                            "Xác thực thất bại",
+                            "Kết quả phép tính không đúng. Vui lòng thử lại!",
                         );
                         initCaptcha();
                         form.querySelector(
@@ -7702,7 +7809,11 @@
                         body: JSON.stringify(formData),
                     })
                         .then(() => {
-                            alert("Gửi dữ liệu thành công!");
+                            showToast(
+                                "success",
+                                "Đăng ký thành công!",
+                                "Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất.",
+                            );
                             form.reset();
                             initCaptcha();
                             btn.textContent = originalText;

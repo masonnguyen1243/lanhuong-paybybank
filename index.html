@@ -6,22 +6,41 @@
         <title>
             Tingee Pay-By-Bank | Tự động hóa quy trình thanh toán doanh nghiệp
         </title>
-        
+
         <!-- Meta Pixel Code -->
         <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '27070627799255113');
-        fbq('track', 'PageView');
+            !(function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod
+                        ? n.callMethod.apply(n, arguments)
+                        : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = "2.0";
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(
+                window,
+                document,
+                "script",
+                "https://connect.facebook.net/en_US/fbevents.js",
+            );
+            fbq("init", "27070627799255113");
+            fbq("track", "PageView");
         </script>
-        <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=27070627799255113&ev=PageView&noscript=1"
+        <noscript
+            ><img
+                height="1"
+                width="1"
+                style="display: none"
+                src="https://www.facebook.com/tr?id=27070627799255113&ev=PageView&noscript=1"
         /></noscript>
         <!-- End Meta Pixel Code -->
 
@@ -1305,7 +1324,7 @@
                 position: relative;
                 text-align: center;
                 padding: 30px;
-                z-index: 2;
+                z-index: 100;
             }
             .iso-badge::before {
                 content: "";
@@ -1315,6 +1334,7 @@
                 border-radius: 50%;
                 opacity: 0.3;
                 animation: rotate 30s linear infinite;
+                z-index: -1;
             }
             .iso-badge::after {
                 content: "";
@@ -1323,6 +1343,7 @@
                 border: 1px solid var(--red);
                 border-radius: 50%;
                 opacity: 0.1;
+                z-index: -1;
             }
             @keyframes rotate {
                 to {
@@ -1353,6 +1374,12 @@
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
                 margin-top: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 3px;
+                cursor: pointer;
+                text-decoration: none;
             }
             .floating-icon {
                 position: absolute;
@@ -5304,7 +5331,16 @@
                             </svg>
                             <div class="iso-title">ISO/IEC<br />27001:2022</div>
                             <div class="iso-sub">Certified by ISOCERT</div>
-                            <div class="iso-tag">✓ Verified</div>
+                            <a
+                                target="_blank"
+                                style="color: inherit; text-decoration: none"
+                                href="https://tingee.vn/wp-content/uploads/2024/01/GCN-CONG-NGHE-HENO-27001.CCpdf_.pdf"
+                            >
+                                <div class="iso-tag">
+                                    ✓
+                                    <span>Verified</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -7536,11 +7572,46 @@
                     <div>
                         <h4>Sản phẩm</h4>
                         <ul>
-                            <li><a href="#features">Tính năng nổi bật</a></li>
-                            <li><a href="#how-it-works">Cách triển khai</a></li>
-                            <li><a href="#security">Bảo mật</a></li>
-                            <li><a href="#case-study">Khách hàng</a></li>
-                            <li><a href="#">Tài liệu API</a></li>
+                            <li>
+                                <a
+                                    rel="noopener"
+                                    target="_blank"
+                                    href="#features"
+                                    >Tính năng nổi bật</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    rel="noopener"
+                                    target="_blank"
+                                    href="#how-it-works"
+                                    >Cách triển khai</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    rel="noopener"
+                                    target="_blank"
+                                    href="https://drive.google.com/file/d/1baa2tZPZvq9HK6w1Tzi2okAjdeo7bJhx/view?usp=drive_link"
+                                    >Bảo mật</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    rel="noopener"
+                                    target="_blank"
+                                    href="#case-study"
+                                    >Khách hàng</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    rel="noopener"
+                                    target="_blank"
+                                    href="https://developers.tingee.vn/docs"
+                                    >Tài liệu API</a
+                                >
+                            </li>
                         </ul>
                     </div>
 
@@ -7836,6 +7907,11 @@
                             form.reset();
                             initCaptcha();
                             btn.textContent = originalText;
+
+                            // Track CompleteRegistration event
+                            if (typeof fbq === "function") {
+                                fbq("track", "CompleteRegistration");
+                            }
                         })
                         .catch((error) => {
                             console.error("Lỗi:", error);

@@ -7908,9 +7908,12 @@
                             initCaptcha();
                             btn.textContent = originalText;
 
-                            // Track CompleteRegistration event
+                            // Track Lead event
                             if (typeof fbq === "function") {
-                                fbq("track", "CompleteRegistration");
+                                fbq("track", "Lead", {
+                                    content_name: "Tingee Pay-By-Bank",
+                                    content_category: "Website Lead Form"
+                                });
                             }
                         })
                         .catch((error) => {

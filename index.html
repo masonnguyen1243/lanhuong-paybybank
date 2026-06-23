@@ -6,10 +6,6 @@
         <title>
             Tingee Pay-By-Bank | Tự động hóa quy trình thanh toán doanh nghiệp
         </title>
-
-        <script>
-    console.log('test scipt 22222')
-</script>
         
         <!-- Meta Pixel Code -->
         <script>
@@ -7768,9 +7764,6 @@
                 </div>
             </div>
         </footer>
-<script>
-    console.log('test scipt 1111')
-</script>
         <script>
             // Scroll effect for navbar
             window.addEventListener("scroll", () => {
@@ -7913,7 +7906,15 @@
                             if (typeof fbq === "function") {
                                 fbq("track", "Lead", {
                                     content_name: "Tingee Pay-By-Bank",
-                                    content_category: "Website Lead Form"
+                                    content_category: "Website Lead Form",
+                                    user_data: {
+                                      em: formData.email,
+                                      ph: formData.phone,
+                                      fn: formData.name,
+                                      cp: formData.company,
+                                      dm: formData.demand,
+                                      ps: formData.position
+                                    }
                                 });
                             }
                         })

@@ -1829,6 +1829,75 @@ Licensed under the SIL Open Font License, Version 1.1 — http://scripts.sil.org
                     </div>
                     <div
                       style="
+                        display: inline-flex;
+                        align-self: flex-start;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 5px 5px 5px 12px;
+                        border: 1px solid #e9ddf4;
+                        border-radius: 12px;
+                        background: #f7f2fb;
+                      "
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="#602E88"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                        style="flex: none; display: block"
+                      >
+                        <path
+                          d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"
+                        ></path>
+                        <path d="M8.5 12l2.5 2.5 4.5-5"></path>
+                      </svg>
+                      <label
+                        for="hero-captcha"
+                        style="
+                          font-size: 13.5px;
+                          font-weight: 600;
+                          color: #5e5670;
+                          white-space: nowrap;
+                        "
+                        >Xác thực:
+                        <b style="color: #3b1863; font-weight: 800"
+                          ><span class="captcha-math"></span> =</b
+                        ></label
+                      ><input
+                        id="hero-captcha"
+                        name="captcha_answer"
+                        type="text"
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        maxlength="2"
+                        placeholder="?"
+                        required="required"
+                        autocomplete="off"
+                        title="Nhập kết quả phép tính"
+                        style="
+                          width: 52px;
+                          height: 34px;
+                          box-sizing: border-box;
+                          padding: 0;
+                          border: 1.5px solid #d9cce8;
+                          border-radius: 9px;
+                          background: #ffffff;
+                          font-family: inherit;
+                          font-size: 15px;
+                          font-weight: 700;
+                          text-align: center;
+                          color: #21173a;
+                        "
+                      />
+                      <input type="hidden" name="captcha_expected" />
+                    </div>
+                    <div
+                      style="
                         display: flex;
                         flex-wrap: wrap;
                         gap: 8px 32px;
@@ -1861,7 +1930,11 @@ Licensed under the SIL Open Font License, Version 1.1 — http://scripts.sil.org
                             "
                           /><span
                             >Tôi đồng ý để HENO liên hệ tư vấn theo
-                            <a href="#" style="color: #602e88; font-weight: 600"
+                            <a
+                              href="https://tingee.vn/chinh-sach-bao-mat/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style="color: #602e88; font-weight: 600"
                               >Chính sách bảo vệ dữ liệu cá nhân</a
                             >.</span
                           ></label
@@ -14008,6 +14081,75 @@ Licensed under the SIL Open Font License, Version 1.1 — http://scripts.sil.org
                         >
                       </div>
                     </fieldset>
+                    <div
+                      style="
+                        display: inline-flex;
+                        align-self: flex-start;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 5px 5px 5px 12px;
+                        border: 1px solid #e9ddf4;
+                        border-radius: 12px;
+                        background: #f7f2fb;
+                      "
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="#602E88"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                        style="flex: none; display: block"
+                      >
+                        <path
+                          d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"
+                        ></path>
+                        <path d="M8.5 12l2.5 2.5 4.5-5"></path>
+                      </svg>
+                      <label
+                        for="lead-captcha"
+                        style="
+                          font-size: 13.5px;
+                          font-weight: 600;
+                          color: #5e5670;
+                          white-space: nowrap;
+                        "
+                        >Xác thực:
+                        <b style="color: #3b1863; font-weight: 800"
+                          ><span class="captcha-math"></span> =</b
+                        ></label
+                      ><input
+                        id="lead-captcha"
+                        name="captcha_answer"
+                        type="text"
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        maxlength="2"
+                        placeholder="?"
+                        required="required"
+                        autocomplete="off"
+                        title="Nhập kết quả phép tính"
+                        style="
+                          width: 52px;
+                          height: 34px;
+                          box-sizing: border-box;
+                          padding: 0;
+                          border: 1.5px solid #d9cce8;
+                          border-radius: 9px;
+                          background: #ffffff;
+                          font-family: inherit;
+                          font-size: 15px;
+                          font-weight: 700;
+                          text-align: center;
+                          color: #21173a;
+                        "
+                      />
+                      <input type="hidden" name="captcha_expected" />
+                    </div>
                     <label
                       for="lead-consent"
                       style="
@@ -14034,8 +14176,12 @@ Licensed under the SIL Open Font License, Version 1.1 — http://scripts.sil.org
                       /><span
                         >Tôi đồng ý để HENO và/hoặc đơn vị phụ trách chương
                         trình sử dụng thông tin đã cung cấp để liên hệ tư vấn về
-                        chương trình theo
-                        <a href="#" style="color: #602e88; font-weight: 600"
+                        chương trình theo/
+                        <a
+                          href="https://tingee.vn/chinh-sach-bao-mat/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style="color: #602e88; font-weight: 600"
                           >Chính sách bảo vệ dữ liệu cá nhân</a
                         >.</span
                       ></label
@@ -14356,17 +14502,60 @@ Licensed under the SIL Open Font License, Version 1.1 — http://scripts.sil.org
           show("mainForm", !state.mainDone);
           show("mainDone", state.mainDone);
         }
+        // Khởi tạo Captcha toán học
+        function initCaptcha(form) {
+          var n1 = Math.floor(Math.random() * 10) + 1;
+          var n2 = Math.floor(Math.random() * 10) + 1;
+          form.querySelector(".captcha-math").textContent = n1 + " + " + n2;
+          form.querySelector('input[name="captcha_expected"]').value = n1 + n2;
+        }
+        document.querySelectorAll("form").forEach(function (form) {
+          if (!form.querySelector(".captcha-math")) return;
+          initCaptcha(form);
+          // Thêm trường Honeypot ẩn (bot sẽ tự động điền trường này nhưng người dùng không thấy)
+          var hp = document.createElement("input");
+          hp.type = "text";
+          hp.name = "website_url_hp";
+          hp.tabIndex = -1;
+          hp.autocomplete = "off";
+          hp.style.display = "none";
+          form.appendChild(hp);
+        });
+        // Gõ lại kết quả thì bỏ thông báo sai cũ
+        document.addEventListener("input", function (e) {
+          if (e.target.name === "captcha_answer")
+            e.target.setCustomValidity("");
+        });
         function valid(el) {
           var f = el && el.form;
-          return f && typeof f.reportValidity === "function"
-            ? f.reportValidity()
-            : true;
+          if (!f || typeof f.reportValidity !== "function") return true;
+          if (!f.reportValidity()) return false;
+          // Kiểm tra kết quả Captcha
+          var ans = f.querySelector('input[name="captcha_answer"]');
+          var expected = f.querySelector('input[name="captcha_expected"]');
+          if (ans && expected && ans.value.trim() !== expected.value) {
+            initCaptcha(f);
+            ans.value = "";
+            ans.setCustomValidity(
+              "Kết quả phép tính không đúng. Vui lòng thử lại!",
+            );
+            f.reportValidity();
+            return false;
+          }
+          return true;
         }
         // Web App (Google Apps Script) ghi lead vào Sheet riêng của trang TPBank
         var WEB_APP_URL =
           "https://script.google.com/macros/s/AKfycbw4537yZd-u3YXYpiZFXcTBdYyBsrjxGej9h0yGA64VCZXEoZeMNssGHe3b-2hUfTnbaw/exec";
         // Gửi dữ liệu form về Google Sheet; prefix là "hero" hoặc "lead"
         function sendLead(form, prefix) {
+          // Kiểm tra Honeypot: bot đã điền trường ẩn thì âm thầm bỏ qua
+          var hp = form.querySelector('input[name="website_url_hp"]');
+          if (hp && hp.value) {
+            form.reset();
+            initCaptcha(form);
+            return;
+          }
           var get = function (n) {
             var f = form.querySelector('[name="' + prefix + "-" + n + '"]');
             return f ? f.value.trim() : "";
@@ -14394,6 +14583,7 @@ Licensed under the SIL Open Font License, Version 1.1 — http://scripts.sil.org
             console.error("Lỗi gửi form:", err);
           });
           form.reset();
+          initCaptcha(form);
         }
         var actions = {
           heroSubmit: function (el) {

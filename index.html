@@ -55,6 +55,45 @@
     </script>
     <!-- End Meta Pixel Code -->
 
+    <!-- Ad Attribution: bắt UTM / fbclid từ URL quảng cáo, lưu localStorage -->
+    <script>
+      (function () {
+        var KEYS = [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_adset",
+          "utm_ad",
+          "utm_campaign_name",
+          "utm_adset_name",
+          "utm_ad_name",
+          "fbclid",
+        ];
+        var params = new URLSearchParams(location.search);
+        var saved = {};
+        try {
+          saved = JSON.parse(localStorage.getItem("ad_attr") || "{}");
+        } catch (e) {}
+
+        var hasNew = KEYS.some(function (k) {
+          return params.has(k);
+        });
+        if (hasNew) {
+          saved = {};
+          KEYS.forEach(function (k) {
+            if (params.has(k)) saved[k] = params.get(k);
+          });
+          saved.landing_url = location.href;
+          saved.first_seen = new Date().toISOString();
+          try {
+            localStorage.setItem("ad_attr", JSON.stringify(saved));
+          } catch (e) {}
+        }
+        window.AD_ATTR = saved;
+      })();
+    </script>
+    <!-- End Ad Attribution -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -6636,6 +6675,9 @@
             return;
           }
 
+          // Thông tin nguồn quảng cáo (đã bắt ở <head>, lưu localStorage)
+          const attr = window.AD_ATTR || {};
+
           const formData = {
             name: form.querySelector('input[name="name"]').value,
             company: form.querySelector('input[name="company"]').value,
@@ -6643,6 +6685,29 @@
             phone: form.querySelector('input[name="phone"]').value,
             email: form.querySelector('input[name="email"]').value,
             demand: form.querySelector('select[name="demand"]').value,
+
+            // --- Attribution: biết lead đến từ campaign / adset / ad nào ---
+            utm_source: attr.utm_source || "",
+            utm_medium: attr.utm_medium || "",
+            utm_campaign: attr.utm_campaign || "",
+            utm_campaign_name: attr.utm_campaign_name || "",
+            utm_adset: attr.utm_adset || "",
+            utm_adset_name: attr.utm_adset_name || "",
+            utm_ad: attr.utm_ad || "",
+            utm_ad_name: attr.utm_ad_name || "",
+            fbclid: attr.fbclid || "",
+            landing_url: attr.landing_url || location.href,
+            first_seen: attr.first_seen || "",
+            referrer: document.referrer || "",
+            user_agent: navigator.userAgent,
+            form_position: form.closest(".hero") ? "hero" : "footer",
+            submitted_at: new Date().toISOString(),
+
+            // --- Gửi kèm để server kiểm tra lại (chống bot gọi thẳng API) ---
+            captcha_expected: expected,
+            captcha_answer: answer,
+            website_url_hp: form.querySelector('input[name="website_url_hp"]')
+              .value,
           };
 
           const btn = form.querySelector(".form-submit");
